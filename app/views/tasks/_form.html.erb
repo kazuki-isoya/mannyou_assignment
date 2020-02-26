@@ -21,6 +21,11 @@
     <%= form.text_area :content %>
   </div>
 
+  <div class="field">
+    <%= form.label :time_limit %>
+    <%= form.datetime_select :time_limit %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
