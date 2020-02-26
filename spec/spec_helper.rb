@@ -17,6 +17,19 @@
 require 'capybara/rspec'
 
 RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:all) do
+    DatabaseCleaner.clean
+  end
+
+  config.after(:all) do
+    DatabaseCleaner.clean
+  end
+
   config.before(:each, type: :system) do
     driven_by :selenium_chrome_headless
   end
