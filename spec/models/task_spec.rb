@@ -1,24 +1,16 @@
 require 'rails_helper'
 
-RSpec.describe 'タスク管理機能', type: :system do
-  before do
-    task = FactoryBot.create(:task, title: 'task')
+RSpec.describe 'タスク管理機能', type: :model do
+  it 'titleが空ならバリデーションが通らない' do
+    task = Task.new(title: '', content: 'not_empty')
+    expect(task).not_to be_valid
   end
-  describe 'タスク一覧画面' do
-    context 'タスクを作成した場合' do
-      it '作成済みのタスクが表示されること' do
-        visit tasks_path
-        expect(page).to have_content 'test'
-      end
-    end
-    context '複数のタスクを作成した場合' do
-      it 'タスクが作成日時の降順に並んでいること' do
-        new_task = FactoryBot.create(:task, title: "new_task")
-        visit tasks_path
-        task_list = all('.task_row')
-        expect(task_list[0]).to have_content "new_task"
-        expect(task_list[1]).to have_content 'task'
-      end
-    end
+  it 'contentが空ならバリデーションが通らない' do
+    task = Task.new(title: 'not_empty', content: '')
+    expect(task).not_to be_valid
+  end
+  it 'titleとcontentに内容が記載されていればバリデーションが通る' do
+    task = Task.new(title: 'not_empty', content: 'not_empty')
+    expect(task).to be_valid
   end
 end
