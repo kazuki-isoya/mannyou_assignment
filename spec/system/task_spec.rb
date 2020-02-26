@@ -14,7 +14,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいること' do
-        new_task = FactoryBot.create(:task, title: 'new_task')
+        new_task = FactoryBot.create(:second_task, title: 'new_task')
         visit tasks_path
         task_list = all('tbody tr')
         expect(task_list[0]).to have_content 'new_task'
