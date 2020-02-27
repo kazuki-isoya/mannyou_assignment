@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_02_27_051416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "time_limit", default: "2020-03-31 19:00:00", null: false
-    t.integer "completed"
+    t.integer "completed", default: 0, null: false
   end
 
 end
