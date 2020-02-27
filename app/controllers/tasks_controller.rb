@@ -6,7 +6,7 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(time_limit: :desc)
     elsif params[:title]
       @tasks = Task.where('title LIKE ?', "%#{params[:title]}%")
-    elsif params[:completed]
+    elsif params[:title].blank? && params[:completed]
       @tasks = Task.where('completed LIKE ?', "%#{params[:completed]}%")
     else
       @tasks = Task.all.order(created_at: :desc)
