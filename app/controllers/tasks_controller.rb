@@ -4,6 +4,12 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]
       @tasks = Task.all.order(time_limit: :desc)
+    elsif params[:title].present? && params[:completed].present?
+      @tasks = Task.where('title LIKE AND completed LIKE ?', "%#{params[:title]}%", "%#{params[:completed]}%")
+    elsif params[:title]
+      @tasks = Task.where('title LIKE ?', "%#{params[:title]}%")
+    elsif params[:completed]
+      @tasks = Task.where('completed LIKE ?', "%#{params[:completed]}%")
     else
       @tasks = Task.all.order(created_at: :desc)
     end
@@ -55,6 +61,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :time_limit)
+    params.require(:task).permit(:title, :content, :time_limit, :completed)
   end
 end
