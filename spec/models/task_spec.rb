@@ -14,12 +14,17 @@ RSpec.describe 'タスク管理機能', type: :model do
   #   task = Task.new(title: 'not_empty', content: 'not_empty')
   #   expect(task).to be_valid
   # end
-  it '検索すると絞り込みがされる' do
-    # task1 = FactoryBot.create(:task)
-    # task2 = FactoryBot.create(:second_task, completed: "完了")
-    # task3 = FactoryBot.create(:second_task, completed: "着手中")
-    # search = Task.where(task: {task_title_search: "factory_second_title", completed_search: "完了"})
-    # expect_task = FactoryBot.create(:second_task, completed: "完了")
-    # result = Task.where(task: {task_title_search: "Factoryで作ったタスクネーム２", completed_search: "完了"})
+  context "検索出来るか" do
+    task1 = FactoryBot.create(:task, title: "task1")
+    task2 = FactoryBot.create(:second_task, completed: "完了")
+    task3 = FactoryBot.create(:second_task, completed: "着手中")
+    it "タスク1で検索" do
+      expect(Task.search("task1")).to include(task1)
+    end
+
+    it "検索できないか" do
+      expect(Task.search("task1")).to_not include(hoohoho)
+    end
   end
+
 end
