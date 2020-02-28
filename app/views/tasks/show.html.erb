@@ -16,8 +16,20 @@
 </p>
 
 <p>
-  <strong>ステータス:</strong>
+  <strong>状態:</strong>
   <%= @task.completed %>
+</p>
+
+<p>
+  <strong>優先順位:</strong>
+  <% @task.priority %>
+  <% if @task.priority == 0  %>
+    <%= "低" %>
+  <% elsif @task.priority == 1  %>
+    <%= "中" %>
+  <% elsif @task.priority == 2  %>
+    <%= "高" %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

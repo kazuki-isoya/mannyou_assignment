@@ -4,6 +4,8 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]
       @tasks = Task.all.order(time_limit: :desc)
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(priority: :desc)
     elsif params[:title].blank? && params[:completed]
       @tasks = Task.search(params)
     elsif params[:title] && params[:completed].blank?
@@ -61,6 +63,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :time_limit, :completed)
+    params.require(:task).permit(:title, :content, :time_limit, :completed, :priority)
   end
 end

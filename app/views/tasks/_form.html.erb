@@ -31,6 +31,11 @@
     <%= form.select :completed, {未着手: "未着手", 着手中: "着手中",完了: "完了"} %>
   </div>
 
+  <div class="field">
+    <%= form.label :priority %>
+    <%= form.select :priority,{低: 0, 中: 1, 高: 2} %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
