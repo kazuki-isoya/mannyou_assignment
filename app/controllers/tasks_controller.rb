@@ -4,10 +4,12 @@ class TasksController < ApplicationController
   def index
     if params[:sort_expired]
       @tasks = Task.all.order(time_limit: :desc)
-    elsif params[:title]
-      @tasks = Task.where('title LIKE ?', "%#{params[:title]}%")
     elsif params[:title].blank? && params[:completed]
-      @tasks = Task.where('completed LIKE ?', "%#{params[:completed]}%")
+      @tasks = Task.where('completed LIKE ?', "%#{params[:completed]}%").order(created_at: :desc)
+    elsif params[:title] && params[:completed].blank?
+      @tasks = Task.where('title LIKE ?', "%#{params[:title]}%").order(created_at: :desc)
+    elsif params[:title] && params[:completed]
+      @tasks = Task.where('title LIKE ?', "%#{params[:title]}%").where('completed LIKE ?', "%#{params[:completed]}%").order(created_at: :desc)
     else
       @tasks = Task.all.order(created_at: :desc)
     end
