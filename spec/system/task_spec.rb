@@ -5,9 +5,9 @@ RSpec.describe 'タスク管理機能', type: :system do
 
 
   before do
-    @task1 = FactoryBot.create(:task, title: 'task1')
-    @task2 = FactoryBot.create(:second_task, title: 'task2')
-    @task3 = FactoryBot.create(:second_task, title: 'task3', time_limit: '2020-02-28 10:00:00')
+    @task1 = FactoryBot.create(:task, title: 'task1', priority: 1)
+    @task2 = FactoryBot.create(:second_task, title: 'task2', priority: 2)
+    @task3 = FactoryBot.create(:second_task, title: 'task3', time_limit: '2020-02-28 10:00:00', priority: 0)
   end
   describe 'タスク一覧画面' do
     # context 'タスクを作成した場合' do
@@ -36,15 +36,25 @@ RSpec.describe 'タスク管理機能', type: :system do
     #     expect(task_list[2]).to have_content 'task3'
     #   end
     # end
-    context '検索ボタンを押した場合' do
-      it '検索フォームに入力されているものだけが表示されること' do
-        task4 = FactoryBot.create(:task, title: 'search_test')
+    # context '検索ボタンを押した場合' do
+    #   it '検索フォームに入力されているものだけが表示されること' do
+    #     task4 = FactoryBot.create(:task, title: 'search_test')
+    #     visit tasks_path
+    #     fill_in "タスク名", with: 'search'
+    #     fill_in "状態", with: ''
+    #     click_on '検索'
+    #     # byebug
+    #     expect(page).to have_content 'search'
+    #   end
+    # end
+    context '優先順位でソートするボタンを押した場合' do
+      it '優先順位の降順に並んでいること' do
         visit tasks_path
-        fill_in "タスク名", with: 'search'
-        fill_in "状態", with: ''
-        click_on '検索'
-        # byebug
-        expect(page).to have_content 'search'
+        click_on '優先順位でソートする'
+        task_list = all('tbody tr')
+        expect(task_list[0]).to have_content '高'
+        expect(task_list[1]).to have_content '中'
+        expect(task_list[2]).to have_content '低'
       end
     end
   end

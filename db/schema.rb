@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_02_28_074259) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "time_limit", default: "2020-03-31 19:00:00", null: false
-    t.string "completed"
+    t.integer "completed"
     t.integer "priority"
     t.index ["title", "completed"], name: "index_tasks_on_title_and_completed"
   end

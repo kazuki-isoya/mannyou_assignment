@@ -6,7 +6,7 @@
   <%= f.label(:title, 'タスク名') %>
   <%= f.text_field :title %>
   <%= f.label(:completed, '状態') %>
-  <%= f.text_field :completed %>
+  <%= f.select :completed, [["未着手", 0 ], ["着手中", 1 ], ["完了", 2 ]] %>
   <%= f.submit('検索') %>
 <% end %>
 
@@ -30,16 +30,7 @@
         <td><%= task.content %></td>
         <td><%= task.time_limit %></td>
         <td><%= task.completed %></td>
-        <td>
-          <% task.priority %>
-          <% if task.priority == 0  %>
-            <%= "低" %>
-          <% elsif task.priority == 1  %>
-            <%= "中" %>
-          <% elsif task.priority == 2  %>
-            <%= "高" %>
-          <% end %>
-        </td>
+        <td><%= task.priority %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -48,6 +39,7 @@
   </tbody>
 </table>
 
+
 <br>
 
 <%= link_to '終了期限でソートする', tasks_path(sort_expired: "true") %>
@@ -55,3 +47,5 @@
 <%= link_to '優先順位でソートする', tasks_path(sort_priority: "true") %>
 
 <%= link_to 'New Task', new_task_path %>
+
+<%= paginate @tasks %>
