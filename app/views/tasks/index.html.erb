@@ -31,9 +31,23 @@
         <td><%= task.time_limit %></td>
         <td><%= task.completed %></td>
         <td><%= task.priority %></td>
-        <td><%= link_to '詳細', task %></td>
-        <td><%= link_to '編集', edit_task_path(task) %></td>
-        <td><%= link_to '削除', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <div class="button">
+          <td>
+            <button type="button" class="btn btn-light">
+              <%= link_to '詳細', task %>
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-light">
+              <%= link_to '編集', edit_task_path(task) %>
+            </button>
+          </td>
+          <td>
+            <button type="button" class="text-white btn btn-danger">
+              <%= link_to '削除', task, method: :delete, data: { confirm: '削除しますか?' } %>
+            </button>
+          </td>
+        </div>
       </tr>
     <% end %>
   </tbody>
@@ -41,11 +55,9 @@
 
 
 <br>
-
-<%= link_to '終了期限でソートする', tasks_path(sort_expired: "true") %>
-
-<%= link_to '優先順位でソートする', tasks_path(sort_priority: "true") %>
-
-<%= link_to '新規登録', new_task_path %>
-
-<%= paginate @tasks %>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <%= link_to '新規登録', new_task_path, class: 'btn btn-success btn-lg' %>
+  <%= link_to '終了期限でソートする', tasks_path(sort_expired: "true") %>
+  <%= link_to '優先順位でソートする', tasks_path(sort_priority: "true") %>
+  <%= paginate @tasks %>
+</nav>

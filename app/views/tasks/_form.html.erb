@@ -27,13 +27,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :completed %>
-    <%= form.select(:completed, {未着手: '未着手', 着手中: '着手中', 完了: '完了'}, { class: "form_completed__select" }) %>
+    <%= form.label :状態 %>
+    <%= form.select(:completed, {未着手: '未着手', 着手中: '着手中', 完了: '完了'}) %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
-    <%= form.select(:priority, {高: '高', 中: '中', 低: '低'}, { class: "form_priority__select" }) %>
+    <%= form.label :優先順位 %>
+    <%= form.select(:priority, {高: '高', 中: '中', 低: '低'}) %>
   </div>
 
   <div class="actions">
