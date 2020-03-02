@@ -7,9 +7,12 @@ class Task < ApplicationRecord
 
   enum completed: %i[未着手 着手中 完了]
   enum priority: %i[高 中 低]
+
   scope :title_search, -> title {
     where(title: title)
   }
+  #LIKE検索
+
   scope :completed_search, -> completed {
     where(completed: completed)
   }

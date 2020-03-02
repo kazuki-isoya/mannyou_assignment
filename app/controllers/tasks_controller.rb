@@ -2,9 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 PER = 4
   def index
-    if params[:sort_expired]
+    # binding.pry
+    if params[:sort_expired] #終了期限でソート
       @tasks = Task.all.order(time_limit: :desc).page(params[:page]).per(4)
-    elsif params[:sort_priority]
+    elsif params[:sort_priority] #優先順位でソート
       @tasks = Task.all.order(priority: :asc).page(params[:page]).per(4)
     elsif params[:title].blank? && params[:completed].blank?
       @tasks = Task.all.page(params[:page]).per(4)
