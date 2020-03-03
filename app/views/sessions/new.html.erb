@@ -1,0 +1,16 @@
+<h1>ログイン</h1>
+<%= form_with(scope: :session, local: true) do |f| %>
+  <div class="low">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :Eメール %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :パスワード %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <%= f.submit "ログイン", class: 'btn btn-primary btn-lg' %>
+<% end %>
