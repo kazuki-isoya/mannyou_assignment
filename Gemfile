@@ -16,6 +16,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
   gem 'pry-rails'
+  gem 'better_errors'
 end
 
 group :development do
@@ -36,3 +37,6 @@ end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'faker'
+gem 'kaminari'
+gem 'bootstrap'
+gem 'jquery-rails'

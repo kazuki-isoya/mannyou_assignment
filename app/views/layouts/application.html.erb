@@ -10,6 +10,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
+        <a class="navbar-brand" href="#">タスク管理アプリ</a>
+      </nav>
+      <%= yield %>
+    </div>
   </body>
 </html>
