@@ -13,6 +13,13 @@
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark mt-3 mb-3">
         <a class="navbar-brand" href="#">タスク管理アプリ</a>
+        <% if current_user %>
+          <p class="navbar-text navbar-right">ログイン中のユーザー:<%= current_user.name %></p>
+          <p class="navbar-text navbar-right"><%= link_to "ログアウトする", logout_path(current_user.id), method: :delete %></p>
+        <% else %>
+          <p class="navbar-text navbar-right"><%= link_to "ログインする", login_path %></p>
+          <p class="navbar-text navbar-right"><%= link_to "新しいユーザーを作成", new_admin_user_path %></p>
+        <% end %>
       </nav>
       <%= yield %>
     </div>
