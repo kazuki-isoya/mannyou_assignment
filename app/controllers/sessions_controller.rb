@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :login_required
+
   def new
     @user = User.new
   end
@@ -15,8 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:user_id)
-    flash[:notice] = 'ログアウトしました'
-    redirect_to new_session_path
+    reset_session
+    redirect_to login_path, notice: 'ログアウトしました'
   end
 end
