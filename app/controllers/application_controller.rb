@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def current_user
+  def current_user #ログイン中のユーザー情報をインスタンス変数として持たせる
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
