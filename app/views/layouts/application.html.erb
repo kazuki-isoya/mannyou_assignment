@@ -16,8 +16,9 @@
         <% if current_user %>
           <p class="navbar-text navbar-right">ログイン中のユーザー:<%= current_user.name %></p>
           <p class="navbar-text navbar-right"><%= link_to "プロフィール", user_path(current_user.id) %></p>
+          <p class="navbar-text navbar-right"><%= link_to "タスク一覧", tasks_path %></p>
           <% if current_user.admin? %>
-            <p class="navbar-text navbar-right"><%= link_to "ユーザー一覧", admin_users_path, class: "nav-link" %></p>
+            <p class="navbar-text navbar-right"><%= link_to "ユーザー一覧", admin_users_path %></p>
           <% end %>
           <p class="navbar-text navbar-right"><%= link_to "ログアウトする", logout_path(current_user.id), method: :delete %></p>
         <% else %>
