@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
-  def login_required #ログインしているかを調べるメソッド
+  def login_required #ログインしていなければログイン画面に飛ばせるメソッド
     redirect_to login_path unless current_user
   end
 end
