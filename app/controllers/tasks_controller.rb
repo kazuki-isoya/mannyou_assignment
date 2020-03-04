@@ -29,19 +29,20 @@ PER = 4
     @task = Task.new
   end
 
-  def edit
-  end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to @task, notice: 'タスクが作成されました' }
       else
         format.html { render :new }
       end
     end
+  end
+
+  def edit
   end
 
   def update
