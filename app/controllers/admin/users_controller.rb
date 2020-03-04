@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :require_admin
 
   def index
-    @users = User.all
+    @users = User.all.order(created_at: :desc)
   end
 
   def new
@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path(@user), notice: "ユーザー「#{@user.name}」を更新しました"
+      redirect_to admin_users_path, notice: "ユーザー「#{@user.name}」を更新しました"
     else
       render :new
     end
@@ -34,8 +34,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_url, notice: "ユーザー「#{@user.name}」を削除しました"
+    if current_user == @user && current_user.admin?
+      redirect_to admin_users_path, notice: "自分自身を削除することは出来ません！"
+    else
+      @user.destroy
+      redirect_to admin_users_path, notice: "ユーザー「#{@user.name}」を削除しました"
+    end
   end
 
   private
