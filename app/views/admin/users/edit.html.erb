@@ -11,11 +11,10 @@
     <%= form.text_area :email, class: 'form-control' %>
   </div>
 
-  <!-- <div class="form-check">
-    <%= form.label :admin, class: 'form-check-label' do %>
-      <%= form.check_box :admin, class: 'form-check-input'%>
-    <% end %>
-  </div> -->
+  <div class="form-select">
+    <%= form.label :admin, '管理者権限' %>
+    <%= form.select :admin, [['あり', 1], ['なし', 0]], { selected: 0 } %>
+  </div>
 
   <div class="form-group">
     <%= form.label :password, 'パスワード' %>
