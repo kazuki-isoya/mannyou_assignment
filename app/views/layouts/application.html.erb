@@ -15,6 +15,9 @@
         <a class="navbar-brand" href="#">タスク管理アプリ</a>
         <% if current_user %>
           <p class="navbar-text navbar-right">ログイン中のユーザー:<%= current_user.name %></p>
+          <% if current_user.admin? %>
+            <p class="navbar-text navbar-right"><%= link_to "ユーザー一覧", admin_users_path, class: "nav-link" %></p>
+          <% end %>
           <p class="navbar-text navbar-right"><%= link_to "ログアウトする", logout_path(current_user.id), method: :delete %></p>
         <% else %>
           <p class="navbar-text navbar-right"><%= link_to "ログインする", login_path %></p>
