@@ -7,13 +7,13 @@ class User < ApplicationRecord
    #adminがtrueのユーザーが1名かつ、自身のadminがtrue？の場合、アクションはfalseになる
   end
   # before_update do
-  #  throw(:abort) unless self.admin?
+  #  throw(:abort) # throw(:abort) if User.where(admin: true).count <= 1 && self.admin?
   # end
 
 
 end
 
 # before_destroy do
-#  throw(:abort) unless self.admin
+#  throw(:abort) unless self.admin?
 # throw(:abort) if User.where(admin: true).count <= 1 && self.admin?
 # end
