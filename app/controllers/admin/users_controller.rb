@@ -20,13 +20,21 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
+    # if current_user == @user && current_user.admin?
+    #   redirect_to admin_users_path, notice: "管理者は管理者画面で自分のプロフィールを編集することは出来ません！"
+    # end
   end
 
+
   def update
-    if @user.update(user_params)
-      redirect_to admin_users_path, notice: "ユーザー「#{@user.name}」を更新しました"
+    unless @user.update(user_params)
+      redirect_to admin_users_path, notice: "編集できません！"
     else
-      render :new
+      if @user.update(user_params)
+        redirect_to admin_users_path, notice: "ユーザー「#{@user.name}」を更新しました"
+      else
+        render :new
+      end
     end
   end
 
@@ -34,11 +42,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    if current_user == @user && current_user.admin?
-      redirect_to admin_users_path, notice: "自分自身を削除することは出来ません！"
+    unless @user.destroy
+      redirect_to admin_users_path, notice: "削除できません！"
     else
-      @user.destroy
-      redirect_to admin_users_path, notice: "ユーザー「#{@user.name}」を削除しました"
+      redirect_to admin_users_path, notice: "ユーザーを削除しました"
     end
   end
 
@@ -53,7 +60,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def require_admin
-    redirect_to root_path unless current_user.admin?
+    redirect_to status: 404 unless current_user.admin?
   end
 
 
