@@ -36,6 +36,13 @@
     <%= form.select(:priority, {高: '高', 中: '中', 低: '低'}) %>
   </div>
 
+  <div class="field">
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <label><%= label.name %></label>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -31,7 +31,7 @@ PER = 4
 
 
   def create
-    @task = current_user.tasks.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save
@@ -48,7 +48,7 @@ PER = 4
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to @task, notice: 'タスクが更新されました' }
       else
         format.html { render :edit }
       end
@@ -58,7 +58,7 @@ PER = 4
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url, notice: 'タスクが削除されました' }
     end
   end
 
@@ -69,6 +69,6 @@ PER = 4
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :time_limit, :completed, :priority)
+    params.require(:task).permit(:title, :content, :time_limit, :completed, :priority, :name, label_ids: [])
   end
 end
