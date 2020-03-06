@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>ユーザー名:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>メールアドレス:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>管理者権限:</strong>
+  <%= @user.admin %>
+</p>
+
+<p>
+  <strong>タスク数:</strong>
+  <%= @user.tasks.count %>
+</p>
+
+
+  <strong>タスク一覧</strong>
+  <table>
+    <thead>
+      <tr>
+        <th>タスク名</th>
+        <th>内容</th>
+      </tr>
+    </thead>
+    <% @user.tasks.each do |u| %>
+      <tbody>
+        <tr>
+          <td><%= u.title %></td>
+          <td><%= u.content %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+
+
+<%= link_to '編集', edit_admin_user_path(@user) %> |
+<%= link_to '戻る', admin_users_path %>

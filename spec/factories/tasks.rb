@@ -4,6 +4,7 @@ FactoryBot.define do
     content { 'test_content' }
     time_limit { '2020-04-30 19:00:00'}
     completed { '未着手' }
+    user_id { 1 }
   end
 
   factory :second_task, class: Task do
@@ -11,5 +12,8 @@ FactoryBot.define do
     content { 'factory_second_content' }
     time_limit { '2020-03-31 19:00:00'}
     completed { '未着手' }
+    user_id { 1 }
   end
+
+
 end
