@@ -24,6 +24,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in "内容", with: 'test_content'
         select_date("2020,3,3", from: "終了期限")
         select_time("13", "00", from: "終了期限")
+        # byebug
         click_button '登録する'
         expect(page).to have_content 'test'
         expect(page).to have_content '2020-03-03 13:00:00'
@@ -67,6 +68,20 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[0]).to have_content 'task1'
         expect(task_list[1]).to have_content 'task2'
         expect(task_list[2]).to have_content 'task3'
+      end
+    end
+    context '検索ボタンを押した場合' do
+      it '検索フォームに入力されているものだけが表示されること' do
+        label = FactoryBot.create(:label)
+        task4 = FactoryBot.create(:task, title: 'search', completed: '未着手', user_id: @task1.user.id)
+        FactoryBot.create(:labeling, task: task4, label: label)
+        visit tasks_path
+        expect(page).to have_content 'タスク一覧'
+        fill_in "タスク名", with: 'search'
+        select '未着手', from: '状態'
+        click_on '検索'
+        # byebug
+        expect(page).to have_content 'search'
       end
     end
     context '優先順位でソートするボタンを押した場合' do
