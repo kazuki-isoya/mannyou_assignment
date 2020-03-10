@@ -42,6 +42,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # 追記した
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
@@ -52,4 +54,5 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
   config.include SelectDateHelpers
+  # 追記ここまで
 end
