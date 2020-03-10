@@ -6,7 +6,9 @@
   <%= f.label(:title, 'タスク名') %>
   <%= f.text_field :title %>
   <%= f.label(:completed, '状態') %>
-  <%= f.select :completed, [["未着手", 0 ], ["着手中", 1 ], ["完了", 2 ]] %>
+  <%= f.select :completed, [ ["未着手", 0 ], ["着手中", 1 ], ["完了", 2 ] ] %>
+  <%= f.label(:label_id, 'ラベル') %>
+  <%= f.select :label_id, Label.pluck(:name, :id) %>
   <%= f.submit('検索') %>
 <% end %>
 
@@ -19,6 +21,7 @@
       <th>終了期限</th>
       <th>状態</th>
       <th>優先順位</th>
+      <th>ラベル番号</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -31,21 +34,16 @@
         <td><%= task.time_limit %></td>
         <td><%= task.completed %></td>
         <td><%= task.priority %></td>
+        <td><%= task.labels.pluck(:name) %></td>
         <div class="button">
           <td>
-            <button type="button" class="btn btn-light">
-              <%= link_to '詳細', task %>
-            </button>
+            <%= link_to '詳細', task, class: 'btn btn-success' %>
           </td>
           <td>
-            <button type="button" class="btn btn-light">
-              <%= link_to '編集', edit_task_path(task) %>
-            </button>
+            <%= link_to '編集', edit_task_path(task), class: 'btn btn-success' %>
           </td>
           <td>
-            <button type="button" class="text-white btn btn-danger">
-              <%= link_to '削除', task, method: :delete, data: { confirm: '削除しますか?' } %>
-            </button>
+            <%= link_to '削除', task, method: :delete, data: { confirm: '削除しますか?' }, class: 'btn btn-danger' %>
           </td>
         </div>
       </tr>

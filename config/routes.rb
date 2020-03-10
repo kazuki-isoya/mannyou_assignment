@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :users
   end
   resources :tasks
+  resources :labels
   root 'tasks#index'
 end
